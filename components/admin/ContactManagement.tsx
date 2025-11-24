@@ -190,7 +190,7 @@ export default function ContactManagement({
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
               {filteredContacts.map((contact) => (
-                <tr key={contact._id as string} className="hover:bg-gray-50">
+                <tr key={String(contact._id)} className="hover:bg-gray-50">
                   <td className="px-3 py-4 sm:px-6">
                     <div className="flex items-center">
                       <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 sm:h-10 sm:w-10">
@@ -231,28 +231,28 @@ export default function ContactManagement({
                       >
                         <Eye className="h-4 w-4" />
                       </button>
-                      {contact.status === 'new' && (contact._id as string) && (
+                      {contact.status === 'new' && contact._id && (
                         <button
-                          onClick={() => contact._id && handleStatusUpdate(contact._id as string, 'read')}
-                          disabled={updatingStatus === (contact._id as string)}
+                          onClick={() => contact._id && handleStatusUpdate(String(contact._id), 'read')}
+                          disabled={updatingStatus === (String(contact._id))}
                           className="text-yellow-600 hover:text-yellow-900 disabled:opacity-50"
                           title="Отметить как прочитанное"
                         >
-                          {updatingStatus === (contact._id as string) ? (
+                          {updatingStatus === (String(contact._id)) ? (
                             <RefreshCw className="h-4 w-4 animate-spin" />
                           ) : (
                             <MessageSquare className="h-4 w-4" />
                           )}
                         </button>
                       )}
-                      {(contact.status === 'new' || contact.status === 'read') && (contact._id as string) && (
+                      {(contact.status === 'new' || contact.status === 'read') && contact._id && (
                         <button
-                          onClick={() => contact._id && handleStatusUpdate(contact._id as string, 'replied')}
-                          disabled={updatingStatus === (contact._id as string)}
+                          onClick={() => contact._id && handleStatusUpdate(String(contact._id), 'replied')}
+                          disabled={updatingStatus === (String(contact._id))}
                           className="text-green-600 hover:text-green-900 disabled:opacity-50"
                           title="Отметить как отвеченное"
                         >
-                          {updatingStatus === (contact._id as string) ? (
+                          {updatingStatus === (String(contact._id)) ? (
                             <RefreshCw className="h-4 w-4 animate-spin" />
                           ) : (
                             <Reply className="h-4 w-4" />
@@ -358,25 +358,25 @@ export default function ContactManagement({
 
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                 <div className="flex space-x-2">
-                  {selectedContact.status === 'new' && (selectedContact._id as string) && (
+                  {selectedContact.status === 'new' && selectedContact._id && (
                     <button
                       onClick={() => {
-                        selectedContact._id && handleStatusUpdate(selectedContact._id as string, 'read');
+                        selectedContact._id && handleStatusUpdate(String(selectedContact._id), 'read');
                         setSelectedContact(null);
                       }}
-                      disabled={updatingStatus === (selectedContact._id as string)}
+                      disabled={updatingStatus === (String(selectedContact._id))}
                       className="inline-flex justify-center rounded-md border border-transparent bg-yellow-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 disabled:opacity-50 sm:text-sm"
                     >
                       Отметить как прочитанное
                     </button>
                   )}
-                  {(selectedContact.status === 'new' || selectedContact.status === 'read') && (selectedContact._id as string) && (
+                  {(selectedContact.status === 'new' || selectedContact.status === 'read') && selectedContact._id && (
                     <button
                       onClick={() => {
-                        selectedContact._id && handleStatusUpdate(selectedContact._id as string, 'replied');
+                        selectedContact._id && handleStatusUpdate(String(selectedContact._id), 'replied');
                         setSelectedContact(null);
                       }}
-                      disabled={updatingStatus === (selectedContact._id as string)}
+                      disabled={updatingStatus === (String(selectedContact._id))}
                       className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50 sm:text-sm"
                     >
                       Отметить как отвеченное

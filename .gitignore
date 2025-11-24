@@ -1,0 +1,7 @@
+/.env
+/.env.local
+/node_modules
+.next
+tsconfig.tsbuildinfo
+.git_backup/
+/.env.backup
